@@ -6,36 +6,28 @@
 /*   By: mshereme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 14:13:17 by mshereme          #+#    #+#             */
-/*   Updated: 2023/11/08 18:52:23 by mshereme         ###   ########.fr       */
+/*   Updated: 2023/11/09 15:51:46 by mshereme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(char *str)
+int	ft_found_new_line(t_list *lst)
 {
 	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-int	ft_newline(t_list *lst)
-{
-	int	i;
-	t_list	*current;
 
 	if (!lst)
 		return (0);
-	current = ft_lstlast(lst);
-	i = 0;
-	while (current->content[i])
+	while (lst)
 	{
-		if (current->content[i])
-			return (1);
-		i++;
+		i = 0;
+		while (lst->content[i] && i < BUFFER_SIZE)
+		{
+			if (lst->content[i] == '\n')
+				return (1);
+			i++;
+		}
+		lst = lst->next;
 	}
 	return (0);
 }
@@ -44,12 +36,38 @@ t_list	*ft_lstlast(t_list *lst)
 {
 	if (!lst)
 		return (NULL);
-	while (lst && lst->next)
+	while (lst->next)
 		lst = lst->next;
 	return (lst);
 }
 
-void	ft_generate_line(char **line, t_list *lst)
+void	ft_lst_copy(t_list *lst, char *line)
+{
+	int	i;
+	int	j;
+
+	if (!lst)
+		return ;
+	j = 0;
+	while (lst)
+	{
+		i = 0;
+		while (lst->content[i] != '\0')
+		{
+			if (lst->content[i] == '\n')
+			{
+				line[j++] = '\n';
+				line[j] = '\0';
+				return ;
+			}
+			line[j++] = lst->content[i++];
+		}
+		lst = lst->next;
+	}
+	line[j] = '\0';
+}
+
+int	ft_len_line(t_list *lst)
 {
 	int	i;
 	int	len;
@@ -58,33 +76,40 @@ void	ft_generate_line(char **line, t_list *lst)
 	while (lst)
 	{
 		i = 0;
-		while (lst->content[i])
+		while (lst->content[i] != '\0')
 		{
 			if (lst->content[i] == '\n')
 			{
 				len++;
-				break;
+				return (len);
 			}
 			len++;
 			i++;
 		}
 		lst = lst->next;
 	}
-	*line = malloc((len + 1) * sizeof(char));
-
+	return (len);
 }
 
-void	ft_free_lst(t_list *lst)
+void	ft_free_lst(t_list **lst, t_list *clean_node, char *buf)
 {
-	t_list	*current;
-	t_list	*next;
+	t_list	*temp;
 
-	current = lst;
-	while (current)
+	if (!(*lst))
+		return ;
+	while (*lst)
 	{
-		free(current->content);
-		next = current->next;
-		free(current);
-		current = next;
+		temp = (*lst)->next;
+		free((*lst)->content);
+		free(*lst);
+		*lst = temp;
+	}
+	*lst = NULL;
+	if (clean_node->content[0])
+		*lst = clean_node;
+	else
+	{
+		free(buf);
+		free(clean_node);
 	}
 }
