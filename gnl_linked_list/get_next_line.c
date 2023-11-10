@@ -6,21 +6,20 @@
 /*   By: mshereme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 10:57:54 by mshereme          #+#    #+#             */
-/*   Updated: 2023/11/09 15:41:37 by mshereme         ###   ########.fr       */
+/*   Updated: 2023/11/10 12:05:39 by mshereme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 /* 3. */ // clean all data before and save data after the '\n'
-
 void	ft_clean_used(t_list **lst)
 {
 	t_list	*last_node;
 	t_list	*clean_node;
 	char	*buf;
-	int		i;
-	int		j;
+	size_t	i;
+	size_t	j;
 
 	buf = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	clean_node = malloc(sizeof(t_list));
@@ -39,11 +38,11 @@ void	ft_clean_used(t_list **lst)
 	ft_free_lst(lst, clean_node, buf);
 }
 
-/* 2. */ // Creat the line that going to be display
+/* 2. */ // Creat the line too '\n'
 char	*ft_creat_line(t_list *lst)
 {
 	char	*line;
-	int		len;
+	size_t	len;
 
 	if (!lst)
 		return (NULL);
@@ -73,7 +72,7 @@ void	ft_subjoin(t_list **lst, char *buf)
 	new_node->next = NULL;
 }
 
-// loop looking always the nb_bytes_read if not '\n'
+// loop looking always the nb_bytes_read if not '\n' in some content
 void	ft_creat_list(t_list **lst, int fd)
 {
 	char	*buf;
@@ -111,3 +110,17 @@ char	*get_next_line(int fd)
 	ft_clean_used(&list);
 	return (line);
 }
+
+/*#include <stdio.h>
+
+int	main()
+{
+	char	*str;
+	int	fd;
+	
+	fd = open("text", O_RDONLY);
+	str = get_next_line(fd);
+	printf("%s", str);
+	free(str);
+}
+*/

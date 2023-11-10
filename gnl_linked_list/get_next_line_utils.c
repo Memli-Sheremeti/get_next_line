@@ -6,7 +6,7 @@
 /*   By: mshereme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 14:13:17 by mshereme          #+#    #+#             */
-/*   Updated: 2023/11/09 15:51:46 by mshereme         ###   ########.fr       */
+/*   Updated: 2023/11/10 12:05:05 by mshereme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_found_new_line(t_list *lst)
 {
-	int	i;
+	size_t i;
 
 	if (!lst)
 		return (0);
@@ -43,8 +43,8 @@ t_list	*ft_lstlast(t_list *lst)
 
 void	ft_lst_copy(t_list *lst, char *line)
 {
-	int	i;
-	int	j;
+	size_t	i;
+	size_t	j;
 
 	if (!lst)
 		return ;
@@ -67,10 +67,10 @@ void	ft_lst_copy(t_list *lst, char *line)
 	line[j] = '\0';
 }
 
-int	ft_len_line(t_list *lst)
+size_t	ft_len_line(t_list *lst)
 {
-	int	i;
-	int	len;
+	size_t	i;
+	size_t	len;
 
 	len = 0;
 	while (lst)
