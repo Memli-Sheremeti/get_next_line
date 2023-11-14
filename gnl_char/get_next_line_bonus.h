@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mshereme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 09:03:10 by mshereme          #+#    #+#             */
-/*   Updated: 2023/11/13 13:31:35 by mshereme         ###   ########.fr       */
+/*   Updated: 2023/11/14 10:58:01 by mshereme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
@@ -21,6 +21,8 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdlib.h>
+# include <limits.h>
+# include <stddef.h>
 
 size_t	ft_strlen(char *str);
 int		ft_strchr(char *s, int c);

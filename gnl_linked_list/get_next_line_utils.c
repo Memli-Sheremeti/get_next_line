@@ -6,7 +6,7 @@
 /*   By: mshereme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 14:13:17 by mshereme          #+#    #+#             */
-/*   Updated: 2023/11/10 12:05:05 by mshereme         ###   ########.fr       */
+/*   Updated: 2023/11/13 13:22:13 by mshereme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_found_new_line(t_list *lst)
 {
-	size_t i;
+	size_t	i;
 
 	if (!lst)
 		return (0);
