@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mshereme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 08:40:29 by mshereme          #+#    #+#             */
-/*   Updated: 2023/11/13 13:37:26 by mshereme         ###   ########.fr       */
+/*   Updated: 2023/11/15 14:36:09 by mshereme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_strjoin(char *s1, char *s2)
 {
@@ -66,16 +66,16 @@ char	*ft_creat_line(char *line, int fd)
 
 char	*get_next_line(int fd)
 {
-	static char	*line = NULL;
 	char		*next_line;
+	static char	*line[FOPEN_MAX];
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &next_line, 0) < 0)
 		return (NULL);
-	line = ft_creat_line(line, fd);
-	if (!line)
+	line[fd] = ft_creat_line(line[fd], fd);
+	if (!line[fd])
 		return (NULL);
-	next_line = ft_get_line(line);
-	line = ft_newline(line);
+	next_line = ft_get_line(line[fd]);
+	line[fd] = ft_newline(line[fd]);
 	return (next_line);
 }
 
